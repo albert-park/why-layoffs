@@ -8,8 +8,16 @@
     "start": "next start"
   },
   "dependencies": {
+    "bootstrap": "^4.4.1",
     "next": "9.3.4",
+    "node-fetch": "^2.6.0",
     "react": "16.13.1",
+    "react-bootstrap-table-next": "^4.0.0",
     "react-dom": "16.13.1"
+  },
+  "devDependencies": {
+    "@types/node": "^13.11.1",
+    "@types/react": "^16.9.34",
+    "typescript": "^3.8.3"
   }
 }
