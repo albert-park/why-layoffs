@@ -35,7 +35,7 @@ const Home = () => {
       </Head>
 
       <main>
-        <h1 className="title">Why Layoff?</h1>
+        <h1 className="title">Why Layoffs?</h1>
 
         <p className="description">
           An examination of the impact of layoffs and furloughs made by public
