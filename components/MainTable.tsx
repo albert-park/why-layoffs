@@ -16,12 +16,6 @@ interface MainTableProps {
   tableData: Array<ItemRow>;
 }
 
-const rowRenderer = (row: ItemRow) => <div>this is the {row.company}</div>;
-
-const expandRow = {
-  renderer: rowRenderer
-};
-
 const defaultSorted = [
   {
     dataField: "percentCash",
@@ -39,7 +33,6 @@ const MainTable: FC<MainTableProps> = ({ tableData }) => {
       striped
       hover
       bordered={false}
-      expandRow={expandRow}
       defaultSorted={defaultSorted}
     />
   );

@@ -1,9 +1,13 @@
+// type FormatterCell = {
+//   cell: number | string
+// }
+
 interface ColumnsData {
   dataField: string;
   text: string;
   sort: boolean;
   align: "left" | "center" | "right";
-  formatter?: (cell: number) => string;
+  formatter?: (cell: number) => JSX.Element | string;
   style?: any;
 }
 
@@ -16,7 +20,7 @@ const numberFormatter = (cell: number) => {
 };
 
 const percentFormatter = (cell: number) => {
-  return `${(cell * 100).toFixed(1)} %`;
+  return `${(cell * 100).toFixed(2)} %`;
 };
 
 const columns: Array<ColumnsData> = [
@@ -30,47 +34,99 @@ const columns: Array<ColumnsData> = [
     dataField: "symbol",
     text: "Stock Symbol",
     sort: true,
-    align: "left"
+    align: "left",
   },
   {
     dataField: "layoffs",
     text: "Number of Employees Laid Off",
     sort: true,
-    align: "left",
-    formatter: numberFormatter
+    align: "center",
+    formatter: numberFormatter,
+    style: (cell: number) => {
+      if (cell < 10000) {
+        return {
+          fontWeight: "bold",
+          color: "white",
+          backgroundColor: "lightpink"
+        }
+
+      } else if (cell > 10000 && cell < 25000) {
+        return {
+          fontWeight: "bold",
+          color: "white",
+          backgroundColor: "lightcoral"
+        }
+      } else {
+        return {
+          fontWeight: "bold",
+          color: "white",
+          backgroundColor: "red"
+        }
+      }
+    }
   },
   {
     dataField: "costToKeep",
-    text: "Cost to Keep Employees ($40k/employee)",
+    text: "Cost to Keep Employees (Median $40k/employee)",
     sort: true,
-    align: "left",
+    align: "center",
     formatter: cashFormatter
   },
   {
     dataField: "cash",
-    text: "Cash on Hand",
+    text: "Company's Cash on Hand (most recent quarter)",
     sort: true,
-    align: "left",
-    formatter: cashFormatter
+    align: "center",
+    formatter: cashFormatter,
+    style: (cell: number) => {
+      if (cell < 100000000) {
+        return {
+          fontWeight: "bold",
+          color: "white",
+          backgroundColor: "darkseagreen"
+        }
+
+      } else if (cell > 100000000 && cell < 1000000000) {
+        return {
+          fontWeight: "bold",
+          color: "white",
+          backgroundColor: "forestgreen"
+        }
+      } else {
+        return {
+          fontWeight: "bold",
+          color: "white",
+          backgroundColor: "darkgreen"
+        }
+      }
+    }
   },
 
   {
     dataField: "percentCash",
     text: "Percentage of Cash on Hand Needed to Keep Employees",
     sort: true,
-    align: "left",
+    align: "center",
     formatter: percentFormatter,
-    style: {
-      fontWeight: "bold",
-      backgroundColor: "palegreen"
+    style: (cell: number) => {
+      if (cell < 0.10) {
+        return {
+          fontWeight: "bold",
+          backgroundColor: "lightgreen"
+        }
+
+      } else if (cell > 0.10 && cell < 0.50) {
+        return {
+          fontWeight: "bold",
+          backgroundColor: "khaki"
+        }
+      } else {
+        return {
+          fontWeight: "bold",
+          backgroundColor: "indianred"
+        }
+      }
     }
-  },
-  {
-    dataField: "equivalentCost",
-    text: "Equivalent Cost to Average American",
-    sort: true,
-    align: "left",
-    formatter: cashFormatter
   }
 ];
 
